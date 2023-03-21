@@ -1,2 +1,2 @@
 # CourseSpringBootDemo
-Course Table API set up without using Hibernate
+Back-end for eCommerce site created using Spring Boot
