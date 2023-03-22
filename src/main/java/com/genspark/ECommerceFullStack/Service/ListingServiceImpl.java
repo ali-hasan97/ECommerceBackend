@@ -2,9 +2,14 @@ package com.genspark.ECommerceFullStack.Service;
 
 import com.genspark.ECommerceFullStack.Dao.ListingDao;
 import com.genspark.ECommerceFullStack.Entity.Listing;
+import org.apache.tomcat.util.http.fileupload.FileUpload;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 
@@ -31,7 +36,13 @@ public class ListingServiceImpl implements ListingService {
     }
 
     @Override
-    public Listing addListing(Listing listing) {
+    public Listing addListing(Listing listing,
+                              @RequestParam("image")MultipartFile multipartFile) throws IOException {
+        String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
+        listing.setImage(fileName);
+        Listing savedListing = listingDao.save(listing);
+        String uploadDir = "listingPhotos/" + savedListing.getProductID();
+        FileUploadUtil.saveFile(uploadDir, fileName, multipartFile);
         return this.listingDao.save(listing);
     }
 

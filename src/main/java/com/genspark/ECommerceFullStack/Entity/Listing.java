@@ -20,8 +20,15 @@ public class Listing {
     @Column(name="c_description")
     private String description;
 
-    @Column(name="c_image")
+    @Column(name="c_image", nullable = true, length = 64)
     private String image;
+
+    @Transient
+    public String getPhotosImagePath() {
+        if (image == null || productID == 0) return null;
+
+        return "/listingPhotos/" + productID + "/" + image;
+    }
 
     public Listing() {
     }

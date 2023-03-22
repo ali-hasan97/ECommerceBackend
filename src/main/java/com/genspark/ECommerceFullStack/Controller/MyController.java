@@ -5,7 +5,10 @@ import com.genspark.ECommerceFullStack.Service.ListingService;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.view.RedirectView;
 
+import java.io.IOException;
 import java.util.*;
 
 @RestController
@@ -16,7 +19,21 @@ public class MyController {
     private ListingService listingService;
     @GetMapping("/")
     public String home() {
-        return "<HTML><H1>Welcome to eCommerce Application</H1></HTML>";
+        return (
+                "<HTML>" +
+                    "<H1>Welcome to eCommerce Application</H1>" +
+                    "<form th:action='@{/listings/save}'" +
+                        "th:object='${listing}' method='post'" +
+                        "enctype='multipart/form-data'>" +
+                        "<div>" +
+
+                        "<label>Photos: </label>" +
+                        "<input type='file' name='image' accept='image/png, image/jpeg' />" +
+                        "</div>" +
+                    "</form>" +
+                    "<img th:src='/@{${listing.photosImagePath}}'/>" +
+                "</HTML>"
+            );
     }
 
     @GetMapping("/listings")
@@ -30,8 +47,8 @@ public class MyController {
     }
 
     @PostMapping("/listings")
-    public Listing addListings(@RequestBody Listing listing) {
-        return this.listingService.addListing(listing);
+    public Listing addListing(@RequestBody Listing listing, MultipartFile multipartFile) throws IOException {
+        return this.listingService.addListing(listing, multipartFile);
     }
 
     @PutMapping("/listings")
