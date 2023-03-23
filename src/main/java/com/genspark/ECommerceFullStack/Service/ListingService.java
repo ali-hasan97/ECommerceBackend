@@ -12,8 +12,7 @@ public interface ListingService {
     List<Listing> getAllListing();
     Listing getListingByID(int productID);
 
-    Listing addListing(Listing listing,
-                       @RequestParam("image") MultipartFile multipartFile) throws IOException;
+    Listing addListing(Listing listing);
 
     Listing updateListing(Listing listing);
 

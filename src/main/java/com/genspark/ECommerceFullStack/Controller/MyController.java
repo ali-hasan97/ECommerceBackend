@@ -11,30 +11,14 @@ import org.springframework.web.servlet.view.RedirectView;
 import java.io.IOException;
 import java.util.*;
 
+@CrossOrigin(origins = "http://localhost:4200")
 @RestController
+@RequestMapping("/api")
 public class MyController {
 
     // autowired because ListingService class is being injected into MyController class
     @Autowired
     private ListingService listingService;
-    @GetMapping("/")
-    public String home() {
-        return (
-                "<HTML>" +
-                    "<H1>Welcome to eCommerce Application</H1>" +
-                    "<form th:action='@{/listings/save}'" +
-                        "th:object='${listing}' method='post'" +
-                        "enctype='multipart/form-data'>" +
-                        "<div>" +
-
-                        "<label>Photos: </label>" +
-                        "<input type='file' name='image' accept='image/png, image/jpeg' />" +
-                        "</div>" +
-                    "</form>" +
-                    "<img th:src='/@{${listing.photosImagePath}}'/>" +
-                "</HTML>"
-            );
-    }
 
     @GetMapping("/listings")
     public List<Listing> getListings() {
@@ -47,8 +31,8 @@ public class MyController {
     }
 
     @PostMapping("/listings")
-    public Listing addListing(@RequestBody Listing listing, MultipartFile multipartFile) throws IOException {
-        return this.listingService.addListing(listing, multipartFile);
+    public Listing addListing(Listing listing) throws IOException {
+        return this.listingService.addListing(listing);
     }
 
     @PutMapping("/listings")

@@ -36,13 +36,7 @@ public class ListingServiceImpl implements ListingService {
     }
 
     @Override
-    public Listing addListing(Listing listing,
-                              @RequestParam("image")MultipartFile multipartFile) throws IOException {
-        String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
-        listing.setImage(fileName);
-        Listing savedListing = listingDao.save(listing);
-        String uploadDir = "listingPhotos/" + savedListing.getProductID();
-        FileUploadUtil.saveFile(uploadDir, fileName, multipartFile);
+    public Listing addListing(Listing listing) {
         return this.listingDao.save(listing);
     }
 
