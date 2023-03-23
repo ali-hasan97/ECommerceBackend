@@ -16,6 +16,7 @@ import java.util.*;
 @RequestMapping("/api")
 public class MyController {
 
+    // http://localhost:9080/api/listings
     // autowired because ListingService class is being injected into MyController class
     @Autowired
     private ListingService listingService;
