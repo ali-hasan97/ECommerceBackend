@@ -15,7 +15,7 @@ public class Listing {
     private String name;
 
     @Column(name="c_price")
-    private int price;
+    private float price;
 
     @Column(name="c_description")
     private String description;
@@ -26,7 +26,7 @@ public class Listing {
     public Listing() {
     }
 
-    public Listing(String name, int price, String description, String image) {
+    public Listing(String name, float price, String description, String image) {
         this.name = name;
         this.price = price;
         this.description = description;
@@ -49,11 +49,11 @@ public class Listing {
         this.name = name;
     }
 
-    public int getPrice() {
+    public float getPrice() {
         return price;
     }
 
-    public void setPrice(int price) {
+    public void setPrice(float price) {
         this.price = price;
     }
 
