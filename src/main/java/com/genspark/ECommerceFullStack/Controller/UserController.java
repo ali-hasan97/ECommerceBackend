@@ -25,8 +25,8 @@ public class UserController {
         return this.userService.getAllUsers();
     }
 
-    @PostMapping(value = "/users", consumes = {"application/x-www-form-urlencoded"})
-    public User addUser(@ModelAttribute User user) throws IOException {
+    @PostMapping(value = "/users")
+    public User addUser(@RequestBody User user) throws IOException {
         return this.userService.addUser(user);
     }
 

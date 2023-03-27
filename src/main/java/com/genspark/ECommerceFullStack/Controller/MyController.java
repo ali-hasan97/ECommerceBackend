@@ -31,8 +31,8 @@ public class MyController {
         return this.listingService.getListingByID(Integer.parseInt(productID));
     }
 
-    @PostMapping(value = "/listings", consumes = {"application/x-www-form-urlencoded"})
-    public Listing addListing(@ModelAttribute Listing listing) throws IOException {
+    @PostMapping(value = "/listings")
+    public Listing addListing(@RequestBody Listing listing) throws IOException {
         // handle application/x-www-form-urlencoded request
         // Use @RequestBody Listing listing in lieu of modelAttribute and delete consumes attribute to use raw Postman
         return this.listingService.addListing(listing);
