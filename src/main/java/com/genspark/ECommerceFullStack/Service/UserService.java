@@ -5,7 +5,7 @@ import com.genspark.ECommerceFullStack.Entity.User;
 import java.util.List;
 
 public interface UserService {
-    List<User> getAllUser();
+    List<User> getAllUsers();
     User getUserByID(int userID);
 
     User addUser(User user);

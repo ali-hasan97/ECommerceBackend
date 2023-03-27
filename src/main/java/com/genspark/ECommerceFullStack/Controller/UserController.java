@@ -15,38 +15,33 @@ import java.util.List;
 public class UserController {
     
     // http://localhost:9080/api/users
-    // autowired because UserService class is being injected into MyController class
+
+    // Step 2
     @Autowired
     private UserService userService;
 
-//    @Autowired
-//    private BCryptPasswordEncoder passwordEncoder;
-
-    @GetMapping("/users")
-    public List<User> getUsers() {
-        return this.userService.getAllUser();
+    @GetMapping(path = "/users")
+    public List<User> getUsers() throws IOException {
+        return this.userService.getAllUsers();
     }
 
-    @GetMapping("/users/{productID}")
-    public User getUserByID(@PathVariable String productID) {
-        return this.userService.getUserByID(Integer.parseInt(productID));
-    }
-
-    @PostMapping("/users")
-    public User addUser(@RequestParam User user) throws IOException {
-//        String pwd = user.getPassword();
-//        String encryptPwd = passwordEncoder.encode(pwd);
-//        user.setPassword(encryptPwd);
+    @PostMapping(value = "/users", consumes = {"application/x-www-form-urlencoded"})
+    public User addUser(@ModelAttribute User user) throws IOException {
         return this.userService.addUser(user);
     }
 
-    @PutMapping("/users")
-    public User updateUser(@RequestBody User user) {
+    @GetMapping("/users/{userID}")
+    public User getUserByID(@PathVariable String userID) {
+        return this.userService.getUserByID(Integer.parseInt(userID));
+    }
+
+    @PutMapping(value = "/users", consumes = {"application/x-www-form-urlencoded"})
+    public User updateUser(@ModelAttribute User user) {
         return this.userService.updateUser(user);
     }
 
     @DeleteMapping("/users/{productID}")
-    public String deleteUsers(@PathVariable String productID) {
-        return this.userService.deleteUserByID(Integer.parseInt(productID));
+    public String deleteUsers(@PathVariable String userID) {
+        return this.userService.deleteUserByID(Integer.parseInt(userID));
     }
 }

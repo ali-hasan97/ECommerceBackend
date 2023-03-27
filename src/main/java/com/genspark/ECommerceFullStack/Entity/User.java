@@ -9,26 +9,28 @@ import java.util.Set;
 public class User {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int userID;
+
+    @Column(nullable = false)
     private String email;
+
+    @Column(nullable = false, unique = true)
     private String username;
+
+    @Column(nullable = false)
     private String password;
 
-    @OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
-    @JoinTable(name="user_listings",joinColumns = @JoinColumn(name="user_id"),inverseJoinColumns=@JoinColumn(name="c_id"))
-    private Set<Listing> listings;
 
     public User() {
 
     }
 
-    public User(int userID, String email, String username, String password, Set<Listing> listings) {
+    public User(int userID, String email, String username, String password) {
         this.userID = userID;
         this.email = email;
         this.username = username;
         this.password = password;
-        this.listings = listings;
     }
 
     public int getUserID() {
@@ -63,11 +65,4 @@ public class User {
         this.password = password;
     }
 
-    public Set<Listing> getListings() {
-        return listings;
-    }
-
-    public void setListings(Set<Listing> listings) {
-        this.listings = listings;
-    }
 }

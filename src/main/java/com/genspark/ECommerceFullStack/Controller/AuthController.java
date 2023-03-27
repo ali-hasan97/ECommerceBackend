@@ -2,10 +2,13 @@ package com.genspark.ECommerceFullStack.Controller;
 
 
 import com.genspark.ECommerceFullStack.AuthenticationBean;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import com.genspark.ECommerceFullStack.Entity.User;
+import com.genspark.ECommerceFullStack.Service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+
+import java.io.IOException;
+import java.util.List;
 
 
 @CrossOrigin(origins = "http://localhost:4200")

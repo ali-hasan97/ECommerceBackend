@@ -38,8 +38,8 @@ public class MyController {
         return this.listingService.addListing(listing);
     }
 
-    @PutMapping("/listings")
-    public Listing updateListing(@RequestBody Listing listing) {
+    @PutMapping(value = "/listings", consumes = {"application/x-www-form-urlencoded"})
+    public Listing updateListing(@ModelAttribute Listing listing) {
         return this.listingService.updateListing(listing);
     }
 
