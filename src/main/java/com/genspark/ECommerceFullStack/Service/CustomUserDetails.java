@@ -7,7 +7,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 import java.util.Collection;
 import java.util.Collections;
 
-//Step2.2 retrieve credentials from database
+// Step2.2 retrieve credentials from database
+// Overriding UserDetails interface because we don't have authorities
 public class CustomUserDetails implements UserDetails {
 
     // User from my entity
