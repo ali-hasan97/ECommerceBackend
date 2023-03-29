@@ -35,6 +35,7 @@ public class UserController {
         return this.userService.getUserByID(Integer.parseInt(userID));
     }
 
+    // TODO: might need to change the put methods later to match post
     @PutMapping(value = "/users", consumes = {"application/x-www-form-urlencoded"})
     public User updateUser(@ModelAttribute User user) {
         return this.userService.updateUser(user);
